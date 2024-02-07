@@ -77,17 +77,25 @@ STRING      \"{print}*\"
 
  
  
-"+"                 		{ ret_print("ADDOP"); }
+"+"                 	{ ret_print("ADDOP"); }
 "-"                     { ret_print("SUBOP"); }
+"**"			{ ret_print("EXPOP"); }
+"&&"			{ ret_print("ANDOP"); }
+"||"			{ ret_print("OROP"); }
+"&"			{ ret_print("BITANDOP"); }
+"|"			{ ret_print("BITOROP"); }
 "*"                     { ret_print("MULOP"); }
 "/"                     { ret_print("DIVOP"); }
-"%"											{ ret_print("MODOP");}
-"//"										{ ret_print("FLOORDIVOP");}
-"++"         			      { ret_print("INCR"); }
-"--"                    { ret_print("DECR");}
+"%"			{ ret_print("MODOP");}
+"//"			{ ret_print("FLOORDIVOP");}
+"+="         		{ ret_print("INCR"); }
+"-="                    { ret_print("DECR");}
 "!"                     { ret_print("NOTOP"); }
 "=="|"!="               { ret_print("EQUOP"); }
 ">"|"<"|">="|"<="       { ret_print("RELOP"); }
+">>"|"<<"               { ret_print("SHIFTOP"); }
+"^"                     { ret_print("XOROP"); }
+"**"			{ ret_print("EXPOP"); }
  
  
 "("             { ret_print("LPAREN"); }
