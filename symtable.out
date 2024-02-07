@@ -1,0 +1,14 @@
+------------ ------ ------------
+Name         Type       Lines    
+------------ ------ -------------
+math         undef     2 
+Alist        undef     9   10 
+a            undef    12   18 
+b            undef    12   15   18 
+calculate    undef    12   21 
+res          undef    16   18 
+x            undef     5    7   21   23   25 
+y            undef     6    7   21 
+z            undef     7 
+print        undef    10   24   26   28 
+flag         undef    13   14   19 
