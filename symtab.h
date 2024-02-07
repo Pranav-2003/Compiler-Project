@@ -42,6 +42,7 @@ typedef struct list_t{
     int st_size;
     int scope;
     RefList *lines;
+    char* st_class;
     // to store value and sometimes more information
     int st_ival; double st_fval; char *st_sval;
     // type
@@ -64,7 +65,7 @@ static list_t **hash_table;
 // Function Declarations
 void init_hash_table(); // initialize hash table
 unsigned int hash(char *key); // hash function 
-void insert(char *name, int len, int type, int lineno); // insert entry
+void insert(char *name, int len, int type, int lineno, char *s_class); // insert entry
 list_t *lookup(char *name); // search for entry
 list_t *lookup_scope(char *name, int scope); // search for entry in scope
 void hide_scope(); // hide the current scope

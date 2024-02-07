@@ -16,7 +16,7 @@ unsigned int hash(char *key){
     return hashval % SIZE;
 }
  
-void insert(char *name, int len, int type, int lineno){
+void insert(char *name, int len, int type, int lineno, char* s_class){
     unsigned int hashval = hash(name);
     list_t *l = hash_table[hashval];
     
@@ -31,6 +31,7 @@ void insert(char *name, int len, int type, int lineno){
         l->scope = cur_scope;
         l->lines = (RefList*) malloc(sizeof(RefList));
         l->lines->lineno = lineno;
+        l->st_class = s_class;
         l->lines->next = NULL;
         l->next = hash_table[hashval];
         hash_table[hashval] = l; 
@@ -74,9 +75,9 @@ void incr_scope(){ /* go to next scope */
 /* print to stdout by default */ 
 void symtab_dump(FILE * of){  
   int i;
-  fprintf(of,"------------ ------ ------------\n");
-  fprintf(of,"Name         Type       Lines    \n");
-  fprintf(of,"------------ ------ -------------\n");
+  fprintf(of,"------------ ------ ------------ -------------\n");
+  fprintf(of,"Name          Type     Class        Lines    \n");
+  fprintf(of,"------------ ------ ------------ -------------\n");
   for (i=0; i < SIZE; ++i){ 
     if (hash_table[i] != NULL){ 
         list_t *l = hash_table[i];
@@ -100,7 +101,10 @@ void symtab_dump(FILE * of){
                 else if (l->inf_type  == STR_TYPE)     fprintf(of,"%-7s","string");
                 else fprintf(of,"%-7s","undef");
             }
-            else fprintf(of,"%-7s","undef"); // if UNDEF or 0
+            else fprintf(of,"%-9s","undef"); // if UNDEF or 0
+            
+            fprintf(of,"%-12s",l->st_class);
+            
             while (t != NULL){
                 fprintf(of,"%4d ",t->lineno);
             t = t->next;
