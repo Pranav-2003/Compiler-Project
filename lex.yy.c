@@ -2308,7 +2308,7 @@ void yyfree (void * ptr )
 
  
 void ret_print(char *token_type){
-    printf("Text: %s\ttoken: %s\tlineno: %d\n", yytext, token_type, lineno);
+    printf("Text: %s\ttoken: %s\tlineno: %d\n\n", yytext, token_type, lineno);
 }
  
 void yyerror(char *message){

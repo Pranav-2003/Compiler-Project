@@ -75,15 +75,15 @@ void incr_scope(){ /* go to next scope */
 /* print to stdout by default */ 
 void symtab_dump(FILE * of){  
   int i;
-  fprintf(of,"------------ ------ ------------ -------------\n");
-  fprintf(of,"Name          Type     Class        Lines    \n");
-  fprintf(of,"------------ ------ ------------ -------------\n");
+  fprintf(of,"------------         ------   ------------  -------------\n");
+  fprintf(of,"Name                  Type       Class          Lines    \n");
+  fprintf(of,"------------         ------   ------------  -------------\n");
   for (i=0; i < SIZE; ++i){ 
     if (hash_table[i] != NULL){ 
         list_t *l = hash_table[i];
         while (l != NULL){ 
             RefList *t = l->lines;
-            fprintf(of,"%-12s ",l->st_name);
+            fprintf(of,"%-20s ",l->st_name);
             if (l->st_type == INT_TYPE) fprintf(of,"%-7s","int");
             else if (l->st_type == REAL_TYPE) fprintf(of,"%-7s","real");
             else if (l->st_type == STR_TYPE) fprintf(of,"%-7s","string");
@@ -101,9 +101,9 @@ void symtab_dump(FILE * of){
                 else if (l->inf_type  == STR_TYPE)     fprintf(of,"%-7s","string");
                 else fprintf(of,"%-7s","undef");
             }
-            else fprintf(of,"%-9s","undef"); // if UNDEF or 0
+            else fprintf(of,"%-10s","undef"); // if UNDEF or 0
             
-            fprintf(of,"%-12s",l->st_class);
+            fprintf(of,"%-13s",l->st_class);
             
             while (t != NULL){
                 fprintf(of,"%4d ",t->lineno);
