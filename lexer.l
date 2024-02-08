@@ -19,9 +19,9 @@
 alpha       [a-zA-Z]
 digit       [0-9]
 alnum       {alpha}|{digit}
-print       [ -~]
+print       [ -!#-~]
  
-ID          {alpha}+{alnum}*
+ID          {alpha}{alnum}*
 ICONST      "0"|[0-9]{digit}*
 FCONST      "0"|{digit}*"."{digit}+
 CCONST      (\'{print}\')|(\'\\[nftrbv]\')
@@ -29,15 +29,17 @@ STRING      \"{print}*\"
  
 %%
  
-"#".*                  { printf("Comment begins from line %d\n", lineno); } 
+"#".*                   { printf("Comment begins from line %d\n", lineno); } 
  
-"'''"                  { printf("Comment begins from line %d ", lineno); BEGIN(ML_COMMENT); }
-<ML_COMMENT><<EOF>>    { yy_fatal_error("No Closing Comment"); }
-<ML_COMMENT>"'''"      { printf("to line %d\n", lineno); BEGIN(INITIAL); }
+"'''"                   { printf("Comment begins from line %d ", lineno); BEGIN(ML_COMMENT); }
+<ML_COMMENT><<EOF>>     { yy_fatal_error("No Closing Comment"); }
+<ML_COMMENT>"'''"       { printf("to line %d\n", lineno); BEGIN(INITIAL); }
 <ML_COMMENT>[^*\n]+     
 <ML_COMMENT>"*"         
-<ML_COMMENT>"\n"       { lineno += 1; }
+<ML_COMMENT>"\n"        { lineno += 1; }
  
+{FCONST}"."{digit}*     { yy_fatal_error("Incorrect Float Declaration");}
+{ICONST}+{alpha}        {yy_fatal_error("Incorrect Variable name");}
 
 "and"			{ ret_print("KEYWORD_AND"); insert(yytext, strlen(yytext), UNDEF, lineno, "KEYWORD");}
 "as"              	{ ret_print("KEYWORD_AS"); insert(yytext, strlen(yytext), UNDEF, lineno, "KEYWORD");}
@@ -67,6 +69,7 @@ STRING      \"{print}*\"
 "not"			{ ret_print("KEYWORD_NOT"); insert(yytext, strlen(yytext), UNDEF, lineno, "KEYWORD");}
 "or"			{ ret_print("KEYWORD_OR"); insert(yytext, strlen(yytext), UNDEF, lineno, "KEYWORD");}
 "pass"			{ ret_print("KEYWORD_PASS"); insert(yytext, strlen(yytext), UNDEF, lineno, "KEYWORD");}
+"print"			{ ret_print("KEYWORD_PRINT"); insert(yytext, strlen(yytext), UNDEF, lineno, "KEYWORD");}
 "raise"			{ ret_print("KEYWORD_RAISE"); insert(yytext, strlen(yytext), UNDEF, lineno, "KEYWORD");}
 "return"   		{ ret_print("KEYWORD_RETURN"); insert(yytext, strlen(yytext), UNDEF, lineno, "KEYWORD");}
 "True"			{ ret_print("KEYWORD_TRUE"); insert(yytext, strlen(yytext), UNDEF, lineno, "KEYWORD");}
@@ -131,7 +134,7 @@ STRING      \"{print}*\"
 %%
  
 void ret_print(char *token_type){
-    printf("yytext: %s\ttoken: %s\tlineno: %d\n", yytext, token_type, lineno);
+    printf("Text: %s\ttoken: %s\tlineno: %d\n", yytext, token_type, lineno);
 }
  
 void yyerror(char *message){
@@ -141,7 +144,7 @@ void yyerror(char *message){
  
 int main(){
     init_hash_table();
-    yyin = fopen("Valid_Input.txt", "r");
+    yyin = fopen("input.py", "r");
     yylex();
     fclose(yyin);
 

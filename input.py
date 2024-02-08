@@ -1,6 +1,6 @@
-
+a = 90
 x = 10
-y = 20.0.0
+y = 20.0
 z = x + y
 
 Alist = [10, 70, 50, 30]
@@ -18,7 +18,7 @@ print(Alist[0])
 calculate(x, y)
 
 if(x > 0)
-	print("Positive")
+	print("Positive",num,"boo")
 elif(x == 0)
 	print("Zero")
 else
