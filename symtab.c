@@ -35,7 +35,7 @@ void insert(char *name, int len, int type, int lineno, char* s_class){
         l->lines->next = NULL;
         l->next = hash_table[hashval];
         hash_table[hashval] = l; 
-        printf("Inserted %s for the first time with linenumber %d!\n", name, lineno); // error checking
+        printf("Inserted %s for the first time with linenumber %d!", name, lineno); // error checking
     }
     /* found in table, so just add line number */
     else{
@@ -46,7 +46,7 @@ void insert(char *name, int len, int type, int lineno, char* s_class){
         t->next = (RefList*) malloc(sizeof(RefList));
         t->next->lineno = lineno;
         t->next->next = NULL;
-        printf("Found %s again at line %d!\n", name, lineno);
+        printf("\n\nFound %s again at line %d!", name, lineno);
     }
 }
  

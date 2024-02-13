@@ -1,5 +1,4 @@
-# Python 3 program to find  
-# factorial of given number
+#This is a comment
 def factorial(n):
     if n < 0:
         return 0
@@ -11,8 +10,10 @@ def factorial(n):
             fact *= n
             n -= 1
         return fact
- 
+        
+ab=6
 
 num = 5
 print("Factorial of",num,"is",
 factorial(num))
+

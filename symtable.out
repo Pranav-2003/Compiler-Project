@@ -1,30 +1,32 @@
 ------------         ------   ------------  -------------
 Name                  Type       Class          Lines    
 ------------         ------   ------------  -------------
-else                 undef     KEYWORD         8 
-or                   undef     KEYWORD         6 
-return               undef     KEYWORD         5    7   13 
-(                    undef     PUNCTUATORS     3   10   17   18 
-)                    undef     PUNCTUATORS     3   10   18   18 
-*                    undef     OP             11 
+else                 undef     KEYWORD         7 
+or                   undef     KEYWORD         5 
+return               undef     KEYWORD         4    6   12 
+(                    undef     PUNCTUATORS     2    9   17   18 
+)                    undef     PUNCTUATORS     2    9   18   18 
+*                    undef     OP             10 
 ,                    undef     PUNCTUATORS    17   17   17 
-0                    undef     CONST           4    5    6 
-1                    undef     CONST           6    7    9   10   12 
+0                    undef     CONST           3    4    5 
+1                    undef     CONST           5    6    8    9   11 
 5                    undef     CONST          16 
-:                    undef     PUNCTUATORS     3    4    6    8   10 
-<                    undef     OP              4 
-=                    undef     OP              9   11   16 
->                    undef     OP             10 
+6                    undef     CONST          14 
+:                    undef     PUNCTUATORS     2    3    5    7    9 
+<                    undef     OP              3 
+=                    undef     OP              8   10   14   16 
+>                    undef     OP              9 
 "is"                 undef     CONST          17 
-def                  undef     KEYWORD         3 
-factorial            undef     ID              3   18 
--=                   undef     OP             12 
-n                    undef     ID              3    4    6    6   10   11   12 
-while                undef     KEYWORD        10 
-==                   undef     OP              6    6 
+def                  undef     KEYWORD         2 
+factorial            undef     ID              2   18 
+-=                   undef     OP             11 
+n                    undef     ID              2    3    5    5    9   10   11 
+while                undef     KEYWORD         9 
+==                   undef     OP              5    5 
 num                  undef     ID             16   17   18 
 print                undef     KEYWORD        17 
 "Factorial of"       undef     CONST          17 
-fact                 undef     ID              9   11   13 
-elif                 undef     KEYWORD         6 
-if                   undef     KEYWORD         4 
+ab                   undef     ID             14 
+fact                 undef     ID              8   10   12 
+elif                 undef     KEYWORD         5 
+if                   undef     KEYWORD         3 

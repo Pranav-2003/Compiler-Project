@@ -134,11 +134,11 @@ STRING      \"{print}*\"
 %%
  
 void ret_print(char *token_type){
-    printf("Text: %s\ttoken: %s\tlineno: %d\n\n", yytext, token_type, lineno);
+    printf("\nText: %s\ttoken: %s\tlineno: %d\n", yytext, token_type, lineno);
 }
  
 void yyerror(char *message){
-    printf("Error: \"%s\" in line %d. Token = %s\n", message, lineno, yytext);
+    printf("\nError: \"%s\" in line %d. Token = %s\n", message, lineno, yytext);
     exit(1);
 }
  
