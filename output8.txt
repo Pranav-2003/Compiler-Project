@@ -1,0 +1,185 @@
+param => epsilon
+
+Line number: 2
+
+constant => number
+
+term => constant
+
+arith_exp => term
+
+Line number: 3
+
+assign => arith_exp
+
+assign_stmt => id = assign
+
+basic_stmt => assign_stmt
+
+finalStatements => basic_stmt
+
+term => id
+
+arith_exp => term
+
+constant => number
+
+term => constant
+
+arith_exp => term
+
+bool_exp => arith_exp > arith_exp
+
+Line number: 4
+
+constant => number
+
+term => constant
+
+arith_exp => term
+
+Line number: 5
+
+return_stmt => return arith_exp
+
+basic_stmt => return_stmt
+
+finalStatements => basic_stmt
+
+constant => number
+
+term => constant
+
+arith_exp => term
+
+Line number: 6
+
+assign => arith_exp
+
+assign_stmt => id = assign
+
+basic_stmt => assign_stmt
+
+finalStatements => basic_stmt
+
+Line number: 7
+
+term => id
+
+arith_exp => term
+
+return_stmt => return arith_exp
+
+basic_stmt => return_stmt
+
+finalStatements => basic_stmt
+
+end_suite => Dedent finalStatements
+
+suite => \n end_suite
+
+suite => \n Nodent finalStatements suite
+
+start_suite => \n Indent finalStatements
+
+if_opt => T_ifif_stmt => if bool_exp : start_suite if_opt
+
+cmpd_stmt => if_stmt
+
+finalStatements => cmpd_stmt
+
+constant => number
+
+term => constant
+
+arith_exp => term
+
+Line number: 8
+
+assign => arith_exp
+
+assign_stmt => id = assign
+
+basic_stmt => assign_stmt
+
+finalStatements => basic_stmt
+
+Line number: 9
+
+term => id
+
+arith_exp => term
+
+return_stmt => return arith_exp
+
+basic_stmt => return_stmt
+
+finalStatements => basic_stmt
+
+Line number: 10
+
+end_suite_func => epsilon
+
+suite_func => \n end_suite_func
+
+suite_func => \n Nodent finalStatements suite_func
+
+suite_func => \n Nodent finalStatements suite_func
+
+suite_func => \n Nodent finalStatements suite_func
+
+start_suite_func => \n Indent finalStatements suite_func
+
+func_def => def id ( param ) : start_suite_func
+
+finalStatements => func_def
+
+StartParse => epsilon
+
+StartParse => finalStatements \n StartParse
+
+Start => StartParse EOF
+
+
+------------------->valid python syntax<--------------------
+
+
+
+<------------>         <------>              <------>        <------> 	       <------------>
+Name                     Type                 value           Scope  	          Line number
+------------            ------                ------ 	       ------ 	         ------------
+a                    	Identifier          	25        	  1  		   2    3    5    6 
+b                    	Identifier          	24        	  1  		   7    8 
+24                   	Constant            	null      	  1  		   2    7 
+25                   	Constant            	null      	  1  		   3    4    5 
+foo                  	Func_Name           	0         	  1  		   1 
+
+func begin foo
+a = 24
+T0 = a > 25
+T1 = not T0
+if T1 goto L1
+a = 25
+L1:
+b = 24
+func end foo
+
+
+------------------->quads<--------------------
+func begin		              (null)	              (null)	                 foo	
+         =		                  24	              (null)	                   a	
+         >		                  25	                   a	                  T0	
+       not		                  T0	              (null)	                  T1	
+        if		                  T1	              (null)	                  L1	
+         =		                  25	              (null)	                   a	
+     Label		              (null)	              (null)	                  L1	
+         =		                  24	              (null)	                   b	
+  func end		              (null)	              (null)	                 foo	
+
+------------------->quads after optimization<--------------------
+func begin		              (null)	              (null)	                 foo	
+         =		                  24	              (null)	                   a	
+         >		                  25	                  25	                  T0	
+       not		                  T0	              (null)	                  T1	
+        if		                  T1	              (null)	                  L1	
+  func end		              (null)	              (null)	                 foo	

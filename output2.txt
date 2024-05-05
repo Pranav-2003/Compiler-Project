@@ -1,0 +1,237 @@
+constant => number
+
+term => constant
+
+arith_exp => term
+
+assign => arith_exp
+
+assign_stmt => id = assign
+
+basic_stmt => assign_stmt
+
+finalStatements => basic_stmt
+
+term => id
+
+arith_exp => term
+
+constant => number
+
+term => constant
+
+arith_exp => term
+
+arith_exp => arith_exp * arith_exp
+
+assign => arith_exp
+
+assign_stmt => id = assign
+
+basic_stmt => assign_stmt
+
+finalStatements => basic_stmt
+
+params => epsilon
+
+params => id params
+
+constant => number
+
+term => constant
+
+arith_exp => term
+
+assign => arith_exp
+
+assign_stmt => id = assign
+
+basic_stmt => assign_stmt
+
+finalStatements => basic_stmt
+
+term => id
+
+arith_exp => term
+
+constant => number
+
+term => constant
+
+arith_exp => term
+
+bool_exp => arith_exp > arith_exp
+
+term => id
+
+arith_exp => term
+
+term => id
+
+arith_exp => term
+
+arith_exp => arith_exp * arith_exp
+
+assign => arith_exp
+
+assign_stmt => id = assign
+
+basic_stmt => assign_stmt
+
+finalStatements => basic_stmt
+
+term => id
+
+arith_exp => term
+
+constant => number
+
+term => constant
+
+arith_exp => term
+
+arith_exp => arith_exp - arith_exp
+
+assign => arith_exp
+
+assign_stmt => id = assign
+
+basic_stmt => assign_stmt
+
+finalStatements => basic_stmt
+
+term => id
+
+arith_exp => term
+
+print_values => arith_exp
+
+print_stmt => print ( print_values )
+
+basic_stmt => print_stmt
+
+finalStatements => basic_stmt
+
+end_suite => Dedent finalStatements
+
+----------------------------------------suite_while => \n end_suite_while
+
+suite_while => \n Nodent finalStatements suite_while
+
+start_suite_while => \n Indent finalStatements suite_while
+
+while_stmt => while bool_exp : start_suite
+
+cmpd_stmt => while_stmt
+
+finalStatements => cmpd_stmt
+
+list_elements => id list_element
+
+call func factorial, 1
+func_call => id ( list_elements )
+
+assign => func_call
+
+assign_stmt => id = assign
+
+basic_stmt => assign_stmt
+
+finalStatements => basic_stmt
+
+end_suite_func => finalStatements
+
+suite_func => \n end_suite_func
+
+suite_func => \n Nodent finalStatements suite_func
+
+start_suite_func => \n Indent finalStatements suite_func
+
+func_def => def id ( param ) : start_suite_func
+
+finalStatements => func_def
+
+StartParse => epsilon
+
+StartParse => finalStatements \n StartParse
+
+StartParse => finalStatements \n StartParse
+
+StartParse => finalStatements \n StartParse
+
+StartParse => \n StartParse
+
+StartParse => \n StartParse
+
+StartParse => \n StartParse
+
+StartParse => \n StartParse
+
+StartParse => \n StartParse
+
+Start => StartParse EOF
+
+
+------------------->valid python syntax<--------------------
+
+
+
+<------------>    <------>          <------>   <------> 	<------------>
+Name                Type             value      Scope  	  Line number
+------------       ------            ------ 	  ------ 	------------
+a            	Identifier          	50        	  0  		   7 
+n            	Identifier          	-1        	  1  		   8   10   11   12   12 
+T0           	ICGtemporary        	50        	  0  		   7 
+T1           	ICGtemporary        	0         	  1  		  10 
+fact         	Identifier          	0         	  1  		   9   11   11   13 
+0            	Constant            	null      	  1  		  10 
+1            	Constant            	null      	  1  		   9   12 
+5            	Constant            	null      	  0  		   6 
+T3           	ICGtemporary        	0         	  1  		  11 
+T4           	ICGtemporary        	-1        	  1  		  12 
+factorial    	List identifier     	null      	  0  		  14 
+factorial    	Func_Name           	1         	  1  		   8 
+num          	Identifier          	5         	  0  		   6    7   14 
+10           	Constant            	null      	  0  		   7 
+
+num = 5
+T0 = num * 10
+a = T0
+func begin factorial
+func param n
+fact = 1
+L0:
+T1 = n > 0
+T2 = not T1
+if T2 goto L1
+T3 = fact * n
+fact = T3
+T4 = n - 1
+n = T4
+goto L0
+L1:
+func end factorial
+func arg num
+call func factorial
+
+
+------------------->quads<--------------------
+         =		                   5	              (null)	                 num	
+         *		                 num	                  10	                  T0	
+         =		                  T0	              (null)	                   a	
+func begin		              (null)	              (null)	           factorial	
+func param		              (null)	              (null)	                   n	
+         =		                   1	              (null)	                fact	
+     Label		              (null)	              (null)	                  L0	
+         >		                   0	                   n	                  T1	
+       not		                  T1	              (null)	                  T2	
+        if		                  T2	              (null)	                  L1	
+         *		                fact	                   n	                  T3	
+         =		                  T3	              (null)	                fact	
+         -		                   n	                   1	                  T4	
+         =		                  T4	              (null)	                   n	
+      goto		              (null)	              (null)	                  L0	
+     Label		              (null)	              (null)	                  L1	
+  func end		              (null)	              (null)	           factorial	
+  func arg		              (null)	              (null)	                 num	
+ call func		              (null)	              (null)	           factorial	

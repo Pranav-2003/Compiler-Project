@@ -1,0 +1,148 @@
+constant => number
+
+term => constant
+
+arith_exp => term
+
+Line number: 2
+
+assign => arith_exp
+
+assign_stmt => id = assign
+
+basic_stmt => assign_stmt
+
+finalStatements => basic_stmt
+
+constant => number
+
+term => constant
+
+arith_exp => term
+
+term => id
+
+arith_exp => term
+
+constant => number
+
+term => constant
+
+arith_exp => term
+
+arith_exp => arith_exp / arith_exp
+
+Line number: 3
+
+arith_exp => arith_exp - arith_exp
+
+assign => arith_exp
+
+assign_stmt => id = assign
+
+basic_stmt => assign_stmt
+
+finalStatements => basic_stmt
+
+term => id
+
+arith_exp => term
+
+constant => number
+
+term => constant
+
+arith_exp => term
+
+term => id
+
+arith_exp => term
+
+arith_exp => arith_exp / arith_exp
+
+constant => number
+
+term => constant
+
+arith_exp => term
+
+arith_exp => arith_exp + arith_exp
+
+arith_exp => ( arith_exp )
+
+arith_exp => arith_exp * arith_exp
+
+Line number: 4
+
+term => id
+
+arith_exp => term
+
+arith_exp => arith_exp - arith_exp
+
+assign => arith_exp
+
+assign_stmt => id = assign
+
+basic_stmt => assign_stmt
+
+finalStatements => basic_stmt
+
+StartParse => epsilon
+
+StartParse => finalStatements \n StartParse
+
+StartParse => finalStatements \n StartParse
+
+StartParse => finalStatements \n StartParse
+
+Start => StartParse EOF
+
+
+------------------->valid python syntax<--------------------
+
+
+
+<------------>         <------>              <------>        <------> 	       <------------>
+Name                     Type                 value           Scope  	          Line number
+------------            ------                ------ 	       ------ 	         ------------
+x                    	Identifier          	14        	  0  		   1    2    3    3 
+y                    	Identifier          	0         	  0  		   2    3 
+z                    	Identifier          	-14       	  0  		   3 
+2                    	Constant            	null      	  0  		   2    3 
+7                    	Constant            	null      	  0  		   2 
+14                   	Constant            	null      	  0  		   1 
+28                   	Constant            	null      	  0  		   3 
+
+x = 14
+T0 = x / 2
+T1 = 7 - T0
+y = T1
+T2 = 28 / x
+T3 = T2 + 2
+T4 = y * T3
+T5 = T4 - x
+z = T5
+
+
+------------------->quads<--------------------
+         =		                  14	              (null)	                   x	
+         /		                   x	                   2	                  T0	
+         -		                   7	                  T0	                  T1	
+         =		                  T1	              (null)	                   y	
+         /		                  28	                   x	                  T2	
+         +		                  T2	                   2	                  T3	
+         *		                   y	                  T3	                  T4	
+         -		                  T4	                   x	                  T5	
+         =		                  T5	              (null)	                   z	
+
+------------------->quads after optimization<--------------------
+         =		                  14	              (null)	                   x	
+         /		                  14	                   2	                  T0	
+         -		                   7	                  T0	                  T1	
+         =		                   0	              (null)	                   y	
+         /		                  28	                  14	                  T2	
+         +		                  T2	                   2	                  T3	
+         *		                   0	                  T3	                  T4	
+         -		                  T4	                  14	                  T5	
+         =		                 -14	              (null)	                   z	

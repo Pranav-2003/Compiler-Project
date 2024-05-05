@@ -1,0 +1,65 @@
+constant => number
+
+term => constant
+
+arith_exp => term
+
+constant => number
+
+term => constant
+
+arith_exp => term
+
+arith_exp => arith_exp * arith_exp
+
+constant => number
+
+term => constant
+
+arith_exp => term
+
+arith_exp => arith_exp * arith_exp
+
+Line number: 2
+
+assign => arith_exp
+
+assign_stmt => id = assign
+
+basic_stmt => assign_stmt
+
+finalStatements => basic_stmt
+
+StartParse => epsilon
+
+StartParse => finalStatements \n StartParse
+
+Start => StartParse EOF
+
+
+------------------->valid python syntax<--------------------
+
+
+
+<------------>         <------>              <------>        <------> 	       <------------>
+Name                     Type                 value           Scope  	          Line number
+------------            ------                ------ 	       ------ 	         ------------
+i                    	Identifier          	2048000   	  0  		   1 
+32                   	Constant            	null      	  0  		   1 
+200                  	Constant            	null      	  0  		   1 
+320                  	Constant            	null      	  0  		   1 
+
+T0 = 320 * 200
+T1 = T0 * 32
+i = T1
+
+
+------------------->quads<--------------------
+         *		                 320	                 200	                  T0	
+         *		                  T0	                  32	                  T1	
+         =		                  T1	              (null)	                   i	
+
+------------------->quads after optimization<--------------------
+         *		                 320	                 200	                  T0	
+         *		               64000	                  32	                  T1	
+         =		             2048000	              (null)	                   i	

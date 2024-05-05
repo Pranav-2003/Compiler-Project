@@ -1,0 +1,317 @@
+constant => number
+
+term => constant
+
+arith_exp => term
+
+Line number: 2
+
+assign => arith_exp
+
+assign_stmt => id = assign
+
+basic_stmt => assign_stmt
+
+finalStatements => basic_stmt
+
+constant => number
+
+term => constant
+
+arith_exp => term
+
+Line number: 3
+
+assign => arith_exp
+
+assign_stmt => id = assign
+
+basic_stmt => assign_stmt
+
+finalStatements => basic_stmt
+
+constant => number
+
+term => constant
+
+arith_exp => term
+
+Line number: 4
+
+assign => arith_exp
+
+assign_stmt => id = assign
+
+basic_stmt => assign_stmt
+
+finalStatements => basic_stmt
+
+constant => number
+
+term => constant
+
+arith_exp => term
+
+Line number: 5
+
+assign => arith_exp
+
+assign_stmt => id = assign
+
+basic_stmt => assign_stmt
+
+finalStatements => basic_stmt
+
+constant => number
+
+term => constant
+
+arith_exp => term
+
+constant => number
+
+term => constant
+
+arith_exp => term
+
+constant => number
+
+term => constant
+
+arith_exp => term
+
+constant => number
+
+term => constant
+
+arith_exp => term
+
+assign => ( list_elements )
+
+assign_stmt => id = assign
+
+basic_stmt => assign_stmt
+
+finalStatements => basic_stmt
+
+Line number: 6
+
+term => id
+
+arith_exp => term
+
+term => id
+
+arith_exp => term
+
+bool_exp => arith_exp < arith_exp
+
+Line number: 7
+
+term => id
+
+arith_exp => term
+
+Line number: 8
+
+term => id
+
+arith_exp => term
+
+arith_exp => arith_exp + arith_exp
+
+assign => arith_exp
+
+assign_stmt => id = assign
+
+basic_stmt => assign_stmt
+
+finalStatements => basic_stmt
+
+term => id
+
+arith_exp => term
+
+list_index => id ( constant )
+
+constant => number
+
+term => constant
+
+arith_exp => term
+
+term => id
+
+arith_exp => term
+
+arith_exp => arith_exp * arith_exp
+
+term => id
+
+arith_exp => term
+
+Line number: 9
+
+term => id
+
+arith_exp => term
+
+arith_exp => arith_exp * arith_exp
+
+arith_exp => arith_exp + arith_exp
+
+basic_stmt => assign_stmt
+
+finalStatements => basic_stmt
+
+term => id
+
+arith_exp => term
+
+constant => number
+
+term => constant
+
+arith_exp => term
+
+Line number: 10
+
+arith_exp => arith_exp + arith_exp
+
+assign => arith_exp
+
+assign_stmt => id = assign
+
+basic_stmt => assign_stmt
+
+finalStatements => basic_stmt
+
+Line number: 11
+
+end_suite => epsilon
+
+suite_while => \n end_suite_while
+
+suite_while => \n Nodent finalStatements suite_while
+
+suite_while => \n Nodent finalStatements suite_while
+
+start_suite_while => \n Indent finalStatements suite_while
+
+while_stmt => while bool_exp : start_suite
+
+cmpd_stmt => while_stmt
+
+finalStatements => cmpd_stmt
+
+StartParse => epsilon
+
+StartParse => finalStatements \n StartParse
+
+StartParse => finalStatements \n StartParse
+
+StartParse => finalStatements \n StartParse
+
+StartParse => finalStatements \n StartParse
+
+StartParse => finalStatements \n StartParse
+
+StartParse => finalStatements \n StartParse
+
+Start => StartParse EOF
+
+
+------------------->valid python syntax<--------------------
+
+
+
+<------------>         <------>              <------>        <------> 	       <------------>
+Name                     Type                 value           Scope  	          Line number
+------------            ------                ------ 	       ------ 	         ------------
+a                    	List identifier     	null      	  0  		   5 
+i                    	Identifier          	1         	  0  		   1    6    8    8    9    9 
+n                    	Identifier          	1000      	  0  		   2    6 
+x                    	Identifier          	17        	  0  		   7    8    8 
+y                    	Identifier          	5         	  0  		   3    7 
+z                    	Identifier          	12        	  0  		   4    7 
+12                   	Constant            	null      	  0  		   4 
+0                    	Constant            	null      	  0  		   1 
+1                    	Constant            	null      	  0  		   5    9 
+2                    	Constant            	null      	  0  		   5 
+3                    	Constant            	null      	  0  		   5 
+4                    	Constant            	null      	  0  		   5 
+5                    	Constant            	null      	  0  		   3    5 
+6                    	Constant            	null      	  0  		   8 
+1000                 	Constant            	null      	  0  		   2 
+
+i = 0
+n = 1000
+y = 5
+z = 12
+func arg 1
+func arg 2
+func arg 3
+func arg 4
+func arg 5
+L0:
+T0 = i < n
+T1 = not T0
+if T1 goto L1
+T2 = y + z
+x = T2
+T3 = 6 * i
+T4 = x * x
+T5 = T3 + T4
+T6 = i + 1
+i = T6
+goto L0
+L1:
+
+
+------------------->quads<--------------------
+         =		                   0	              (null)	                   i	
+         =		                1000	              (null)	                   n	
+         =		                   5	              (null)	                   y	
+         =		                  12	              (null)	                   z	
+  func arg		              (null)	              (null)	                   1	
+  func arg		              (null)	              (null)	                   2	
+  func arg		              (null)	              (null)	                   3	
+  func arg		              (null)	              (null)	                   4	
+  func arg		              (null)	              (null)	                   5	
+     Label		              (null)	              (null)	                  L0	
+         <		                   n	                   i	                  T0	
+       not		                  T0	              (null)	                  T1	
+        if		                  T1	              (null)	                  L1	
+         +		                   y	                   z	                  T2	
+         =		                  T2	              (null)	                   x	
+         *		                   6	                   i	                  T3	
+         *		                   x	                   x	                  T4	
+         +		                  T3	                  T4	                  T5	
+         +		                   i	                   1	                  T6	
+         =		                  T6	              (null)	                   i	
+      goto		              (null)	              (null)	                  L0	
+     Label		              (null)	              (null)	                  L1	
+
+------------------->quads after optimization<--------------------
+         =		                   0	              (null)	                   i	
+         =		                1000	              (null)	                   n	
+         =		                   5	              (null)	                   y	
+         =		                  12	              (null)	                   z	
+  func arg		              (null)	              (null)	                   1	
+  func arg		              (null)	              (null)	                   2	
+  func arg		              (null)	              (null)	                   3	
+  func arg		              (null)	              (null)	                   4	
+  func arg		              (null)	              (null)	                   5
+         =		                  17	              (null)	                   x	
+         *		                  17	                  17	                  T4	
+         +		                  T3	                 289	                  T5	
+         +		                   1	                   i	                  T6	
+         =		                  T6	              (null)	                   i	
+     Label		              (null)	              (null)	                  L0	
+         <		                1000	                   1	                  T0	
+       not		                  10	              (null)	                  T1	
+        if		                  T1	              (null)	                  L1	
+         +		                   5	                  12	                  T2		
+         *		                   6	                   1	                  T3	
+      goto		              (null)	              (null)	                  L0	
+     Label		              (null)	              (null)	                  L1	
