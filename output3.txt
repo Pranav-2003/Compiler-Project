@@ -881,10 +881,10 @@ func param		              (null)	              (null)	                high
          +		                   0	                   1	                  T5	
          =		                  05	              (null)	                   i	
          +		                   1	                   1	                  T6	
-         =		                  16	              (null)	                   j	
+         =		                  T6	              (null)	                   j	
      Label		              (null)	              (null)	                  L2	
          +		                   0	                   1	                  T7	
-         =		                  17	              (null)	                temp	
+         =		                  T7	              (null)	                temp	
       goto		              (null)	              (null)	                  L0	
      Label		              (null)	              (null)	                  L3	
          +		                   0	                   1	                  T8	
@@ -895,7 +895,7 @@ func param		              (null)	              (null)	               array
 func param		              (null)	              (null)	                 low	
 func param		              (null)	              (null)	                high	
          <		                high	                 low	                 T10	
-       not		                 010	              (null)	                 T11	
+       not		                 T10	              (null)	                 T11	
         if		                 T11	              (null)	                  L5	
   func arg		              (null)	              (null)	               array	
   func arg		              (null)	              (null)	                null	
@@ -932,6 +932,6 @@ func param		              (null)	              (null)	                high
        not		                 T15	              (null)	                 T16	
         if		                 T16	              (null)	                  L7	
          +		                   1	                   1	                 T17	
-         =		                 117	              (null)	                   x	
+         =		                 T17	              (null)	                   x	
       goto		              (null)	              (null)	                  L6	
      Label		              (null)	              (null)	                  L7	

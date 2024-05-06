@@ -1,63 +1,16 @@
-constant => number
+Line number: 2
 
-term => constant
+Line number: 3
 
-arith_exp => term
-
-assign => arith_exp
-
-num = 5
-assign_stmt => id = assign
-
-basic_stmt => assign_stmt
-
-finalStatements => basic_stmt
-
-term => id
-
-arith_exp => term
-
-constant => number
-
-term => constant
-
-arith_exp => term
-
-arith_exp => arith_exp * arith_exp
-
-T0 = num * 10
-assign => arith_exp
-
-a = T0
-assign_stmt => id = assign
-
-basic_stmt => assign_stmt
-
-finalStatements => basic_stmt
-
-func begin factorial
-func param n
-func param m
 params => epsilon
+
+params => , id params
 
 params => , id params
 
 params => id params
 
-constant => number
-
-term => constant
-
-arith_exp => term
-
-assign => arith_exp
-
-n = 0
-assign_stmt => id = assign
-
-basic_stmt => assign_stmt
-
-finalStatements => basic_stmt
+Line number: 4
 
 constant => number
 
@@ -65,75 +18,65 @@ term => constant
 
 arith_exp => term
 
+Line number: 5
+
 assign => arith_exp
 
-res = 1
 assign_stmt => id = assign
 
 basic_stmt => assign_stmt
 
 finalStatements => basic_stmt
 
-constant => number
-
-term => constant
-
-arith_exp => term
-
-assign => arith_exp
-
-fact = 1
-assign_stmt => id = assign
-
-basic_stmt => assign_stmt
-
-finalStatements => basic_stmt
-
-L0: 
 term => id
 
 arith_exp => term
 
-constant => number
-
-term => constant
+term => id
 
 arith_exp => term
 
-bool_exp => arith_exp > arith_exp
+bool_exp => arith_exp < arith_exp
 
-T1 = n > 0
+Line number: 6
+
+term => id
+
+arith_exp => term
+
+list_index => id ( constant )
+
+term => list_index
+
+arith_exp => term
+
+term => id
+
+arith_exp => term
+
+bool_term => arith_exp == arith_exp
+
+bool_exp => bool_term
+
 bool_factor => ( bool_exp )
 
 bool_term => bool_factor
 
 bool_exp => bool_term
 
-T2 = not T1
-if T2 goto L1
-term => id
+Line number: 7
 
-arith_exp => term
+Line number: 8
 
 term => id
 
 arith_exp => term
 
-arith_exp => arith_exp * arith_exp
+return_stmt => return arith_exp
 
-T3 = fact * n
-assign => arith_exp
-
-fact = T3
-assign_stmt => id = assign
-
-basic_stmt => assign_stmt
+basic_stmt => return_stmt
 
 finalStatements => basic_stmt
-
-term => id
-
-arith_exp => term
 
 constant => number
 
@@ -141,49 +84,31 @@ term => constant
 
 arith_exp => term
 
-arith_exp => arith_exp - arith_exp
+Line number: 9
 
-T4 = n - 1
-assign => arith_exp
+return_stmt => return - arith_exp
 
-n = T4
-assign_stmt => id = assign
-
-basic_stmt => assign_stmt
-
-finalStatements => basic_stmt
-
-term => id
-
-arith_exp => term
-
-print_values => arith_exp
-
-print_stmt => print ( print_values )
-
-basic_stmt => print_stmt
-
-finalStatements => basic_stmt
-
-term => id
-
-arith_exp => term
-
-print_values => arith_exp
-
-print_stmt => print ( print_values )
-
-basic_stmt => print_stmt
+basic_stmt => return_stmt
 
 finalStatements => basic_stmt
 
 end_suite => Dedent finalStatements
 
+suite => \n end_suite
+
+start_suite => \n Indent finalStatements
+
+if_opt => T_ifif_stmt => if bool_exp : start_suite if_opt
+
+cmpd_stmt => if_stmt
+
+finalStatements => cmpd_stmt
+
+Line number: 10
+
+end_suite => epsilon
+
 suite_while => \n end_suite_while
-
-suite_while => \n Nodent finalStatements suite_while
-
-suite_while => \n Nodent finalStatements suite_while
 
 start_suite_while => \n Indent finalStatements suite_while
 
@@ -193,14 +118,41 @@ cmpd_stmt => while_stmt
 
 finalStatements => cmpd_stmt
 
-func end factorial
-end_suite_func => epsilon
+constant => number
+
+term => constant
+
+arith_exp => term
+
+constant => number
+
+term => constant
+
+arith_exp => term
+
+constant => number
+
+term => constant
+
+arith_exp => term
+
+constant => number
+
+term => constant
+
+arith_exp => term
+
+assign => ( list_elements )
+
+assign_stmt => id = assign
+
+basic_stmt => assign_stmt
+
+finalStatements => basic_stmt
+
+end_suite_func => finalStatements
 
 suite_func => \n end_suite_func
-
-suite_func => \n Nodent finalStatements suite_func
-
-suite_func => \n Nodent finalStatements suite_func
 
 suite_func => \n Nodent finalStatements suite_func
 
@@ -210,6 +162,140 @@ func_def => def id ( param ) : start_suite_func
 
 finalStatements => func_def
 
+Line number: 11
+
+constant => number
+
+term => constant
+
+arith_exp => term
+
+Line number: 12
+
+assign => arith_exp
+
+assign_stmt => id = assign
+
+basic_stmt => assign_stmt
+
+finalStatements => basic_stmt
+
+term => len ( array )
+
+arith_exp => term
+
+Line number: 13
+
+assign => arith_exp
+
+assign_stmt => id = assign
+
+basic_stmt => assign_stmt
+
+finalStatements => basic_stmt
+
+term => id
+
+arith_exp => term
+
+term => id
+
+arith_exp => term
+
+list_elements => id list_element
+
+func_call => id ( list_elements )
+
+assign => func_call
+
+assign_stmt => id = assign
+
+basic_stmt => assign_stmt
+
+finalStatements => basic_stmt
+
+Line number: 14
+
+term => id
+
+arith_exp => term
+
+constant => number
+
+term => constant
+
+arith_exp => term
+
+bool_term => arith_exp == arith_exp
+
+bool_exp => bool_term
+
+Line number: 15
+
+constant => string
+
+term => constant
+
+arith_exp => term
+
+print_values => arith_exp
+
+print_stmt => print ( print_values )
+
+basic_stmt => print_stmt
+
+finalStatements => basic_stmt
+
+Line number: 16
+
+end_suite => epsilon
+
+suite => \n end_suite
+
+start_suite => \n Indent finalStatements
+
+Line number: 17
+
+constant => string
+
+term => constant
+
+arith_exp => term
+
+term => id
+
+arith_exp => term
+
+print_values => arith_exp
+
+print_values => arith_exp , print_values
+
+print_stmt => print ( print_values )
+
+basic_stmt => print_stmt
+
+finalStatements => basic_stmt
+
+Line number: 18
+
+Line number: 19
+
+end_suite => epsilon
+
+suite => \n end_suite
+
+start_suite => \n Indent finalStatements
+
+else_stmt => else : start_suite
+
+elif_stmts => else_stmt
+
+if_opt => elif_stmtsif_stmt => if bool_exp : start_suite if_opt
+
+cmpd_stmt => if_stmt
+
+finalStatements => cmpd_stmt
+
 StartParse => epsilon
 
 StartParse => finalStatements \n StartParse
@@ -218,11 +304,9 @@ StartParse => finalStatements \n StartParse
 
 StartParse => finalStatements \n StartParse
 
-StartParse => \n StartParse
+StartParse => finalStatements \n StartParse
 
-StartParse => \n StartParse
-
-StartParse => \n StartParse
+StartParse => finalStatements \n StartParse
 
 StartParse => \n StartParse
 
@@ -235,61 +319,124 @@ Start => StartParse EOF
 
 
 
-<------------>    <------>   <------>   <------> 	<------------>
-Name                Type      value      Scope  	  Line number
-------------       ------    ------ 	  ------ 	------------
-a            	Identifier	50        	  0  		   7 
-res          	Identifier	1         	  1  		  10 
-m            	Identifier	null      	  1  		   8 
-n            	Identifier	-1        	  1  		   8    9   12   13   14   14   15 
-T0           	ICGtemporary	50        	  0  		   7 
-T1           	ICGtemporary	0         	  1  		  12 
-fact         	Identifier	0         	  1  		  11   13   13   16 
-0            	Constant  	null      	  1  		   9   12 
-1            	Constant  	null      	  1  		  10   11   14 
-5            	Constant  	null      	  0  		   6 
-T3           	ICGtemporary	0         	  1  		  13 
-T4           	ICGtemporary	-1        	  1  		  14 
-factorial    	Func_Name 	2         	  1  		   8 
-num          	Identifier	5         	  0  		   6    7 
-10           	Constant  	null      	  0  		   7 
+<------------>         <------>              <------>        <------> 	       <------------>
+Name                     Type                 value           Scope  	          Line number
+------------            ------                ------ 	       ------ 	         ------------
+i                    	Identifier          	0         	  1  		   4    5    6    7 
+x                    	Identifier          	10        	  0  		  11   13 
+x                    	Identifier          	null      	  1  		   3    6 
+arr                  	Identifier          	null      	  0  		  10   13 
+arr                  	Identifier          	null      	  1  		   3 
+"Element is present at index" 	Constant            	null      	  0  		  17 
+"Element is not present in array" 	Constant            	null      	  0  		  15 
+0                    	Constant            	null      	  1  		   4 
+1                    	Constant            	null      	  0  		  14 
+1                    	Constant            	null      	  1  		   8 
+2                    	Constant            	null      	  0  		  10 
+3                    	Constant            	null      	  0  		  10 
+4                    	Constant            	null      	  0  		  10 
+N                    	Identifier          	N         	  0  		  12   13 
+N                    	Identifier          	null      	  1  		   3    5 
+search               	Func call           	null      	  0  		  13 
+search               	Func_Name           	3         	  1  		   3 
+result               	Identifier          	null      	  0  		  13   14   17 
+10                   	Constant            	null      	  0  		  10   11 
+40                   	Constant            	null      	  0  		  10 
 
-------------------->quads before optimization<--------------------
-=		5	(null)	num	
-*		num	10	T0	
-=		T0	(null)	a	
-func begin		(null)	(null)	factorial	
-func param		(null)	(null)	n	
-func param		(null)	(null)	m	
-=		0	(null)	n	
-=		1	(null)	res	
-=		1	(null)	fact	
-Label		(null)	(null)	L0	
->		0	n	T1	
-not		T1	(null)	T2	
-if		T2	(null)	L1	
-*		fact	n	T3	
-=		T3	(null)	fact	
--		n	1	T4	
-=		T4	(null)	n	
-func end		(null)	(null)	factorial	
+func begin search
+func param arr
+func param N
+func param x
+i = 0
+L0:
+T0 = i < N
+T1 = not T0
+if T1 goto L1
+T2 = arr[i] == x
+if T2 goto L2
+L2:
+goto L0
+L1:
+func end search
+func arg 2
+func arg 3
+func arg 4
+func arg 10
+func arg 40
+x = 10
+func arg arr
+func arg N
+func arg 10
+T3 = call func search
+T4 = T3 == -1
+if T3 goto L4
+L4:
+goto L5
+L5:
+
+
+------------------->quads<--------------------
+func begin		              (null)	              (null)	              search	
+func param		              (null)	              (null)	                 arr	
+func param		              (null)	              (null)	                   N	
+func param		              (null)	              (null)	                   x	
+         =		                   0	              (null)	                   i	
+     Label		              (null)	              (null)	                  L0	
+         <		                   N	                   i	                  T0	
+       not		                  T0	              (null)	                  T1	
+        if		                  T1	              (null)	                  L1	
+       not		                   x	              (null)	                  T2	
+        if		                  T2	              (null)	                  L2	
+     Label		              (null)	              (null)	                  L2	
+      goto		              (null)	              (null)	                  L0	
+     Label		              (null)	              (null)	                  L3	
+  func end		              (null)	              (null)	              search	
+  func arg		              (null)	              (null)	                   2	
+  func arg		              (null)	              (null)	                   3	
+  func arg		              (null)	              (null)	                   4	
+  func arg		              (null)	              (null)	                  10	
+  func arg		              (null)	              (null)	                  40	
+         =		                  10	              (null)	                   x	
+         =		                   =	              (null)	                   x	
+  func arg		              (null)	              (null)	                 arr	
+  func arg		              (null)	              (null)	                   N	
+  func arg		              (null)	              (null)	                  10	
+ call func		              (null)	              (null)	              search	
+       not		                   1	              (null)	                  T3	
+        if		                  T3	              (null)	                  L5	
+     Label		              (null)	              (null)	                  L5	
+      goto		              (null)	              (null)	                  L7	
+     Label		              (null)	              (null)	                  L0	
+     Label		              (null)	              (null)	                  L7	
 
 ------------------->quads after optimization<--------------------
-=		5	(null)	num	
-*		5um	10	T0	
-=		50	(null)	a	
-func begin		(null)	(null)	factorial	
-func param		(null)	(null)	n	
-func param		(null)	(null)	m	
-=		0	(null)	n	
-=		1	(null)	res	
-=		1	(null)	fact	
-Label		(null)	(null)	L0	
->		0	-1	T1	
-not		01	(null)	T2	
-if		T2	(null)	L1	
-*		0act	-1	T3	
-=		03	(null)	fact	
--		-1	1	T4	
-=		-1	(null)	n	
-func end		(null)	(null)	factorial	
+func begin		              (null)	              (null)	              search	
+func param		              (null)	              (null)	                 arr	
+func param		              (null)	              (null)	                   N	
+func param		              (null)	              (null)	                   x	
+         =		                   0	              (null)	                   i	
+     Label		              (null)	              (null)	                  L0	
+         <		                   N	                   0	                  T0	
+       not		                  00	              (null)	                  T1	
+        if		                  T1	              (null)	                  L1	
+       not		                  10	              (null)	                  T2	
+        if		                  T2	              (null)	                  L2	
+     Label		              (null)	              (null)	                  L3	
+  func end		              (null)	              (null)	              search	
+  func arg		              (null)	              (null)	                   2	
+  func arg		              (null)	              (null)	                   3	
+  func arg		              (null)	              (null)	                   4	
+  func arg		              (null)	              (null)	                  10	
+  func arg		              (null)	              (null)	                  40	
+         =		                  10	              (null)	                   x	
+         =		                   =	              (null)	                   x	
+  func arg		              (null)	              (null)	                 arr	
+  func arg		              (null)	              (null)	                   N	
+  func arg		              (null)	              (null)	                  10	
+ call func		              (null)	              (null)	              search	
+       not		                   1	              (null)	                  T3	
+        if		                  T3	              (null)	                  L5	
+     Label		              (null)	              (null)	                  L5	
+      goto		              (null)	              (null)	                  L7	
+     Label		              (null)	              (null)	                  L0	
+     Label		              (null)	              (null)	                  L7	

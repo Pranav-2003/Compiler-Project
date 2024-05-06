@@ -575,7 +575,7 @@ char *yytext;
   int yycolumn = 1;
   int beginning = 1;
   int indentation_type;
- 	void display_token(char *token);
+  void display_token(char *token);
   int indent_type(int indent_depth);
 
   //Definitions
@@ -1154,7 +1154,7 @@ YY_RULE_SETUP
 case 49:
 YY_RULE_SETUP
 #line 129 "lexer.l"
-{yylval.data = strdup(yytext); display_token(yylval.data); return T_identifier;}
+{yylval.data = strdup(yytext); if(strlen(yylval.data)>79){printf("Variable length exceeded!!\n");exit(0);} display_token(yylval.data); return T_identifier;}
 	YY_BREAK
 case 50:
 YY_RULE_SETUP

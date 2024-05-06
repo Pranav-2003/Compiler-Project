@@ -16,7 +16,7 @@
   int yycolumn = 1;
   int beginning = 1;
   int indentation_type;
- 	void display_token(char *token);
+  void display_token(char *token);
   int indent_type(int indent_depth);
 
   //Definitions
@@ -126,7 +126,7 @@ double_quote_string \"([^\"\n])*\"
 {single_quote_string} {yylval.data = strdup(yytext); display_token(yylval.data); return T_string;}
 {double_quote_string} {yylval.data = strdup(yytext); display_token(yylval.data); return T_string;}
 {number} {yylval.data = strdup(yytext); display_token(yylval.data); return T_number;}
-{id} {yylval.data = strdup(yytext); display_token(yylval.data); return T_identifier;}
+{id} {yylval.data = strdup(yytext); if(strlen(yylval.data)>79){printf("Variable length exceeded!!\n");exit(0);} display_token(yylval.data); return T_identifier;}
 
 %%
 

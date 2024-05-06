@@ -129,6 +129,7 @@ bool_exp : bool_term T_or bool_term {printf("bool_exp => bool_term or bool_term\
 
 bool_term : bool_factor {printf("bool_term => bool_factor\n\n");}
           | arith_exp T_equalOP arith_exp {printf("bool_term => arith_exp == arith_exp\n\n");}
+          | arith_exp T_equalOP T_minus arith_exp {printf("bool_term => arith_exp == arith_exp\n\n");}
           | T_True {insert("Constant", "True", @1.first_line, strlen($<data>1), "null");printf("bool_term => True\n\n");}
           | T_False {insert("Constant", "False", @1.first_line, strlen($<data>1), "null");printf("bool_term => False\n\n");};
 
@@ -141,6 +142,7 @@ continue_stmt : T_continue {printf("continue_stmt => continue\n\n");}
 break_stmt : T_break {printf("break_stmt => break\n\n");}
 return_stmt : T_return {dc_flag = 1; printf("return_stmt => return\n\n");}
 			| T_return arith_exp {dc_flag = 1; printf("return_stmt => return arith_exp\n\n");}
+			| T_return T_minus arith_exp {dc_flag = 1; printf("return_stmt => return - arith_exp\n\n");}
 	    	| T_return bool_exp {dc_flag = 1; printf("return_stmt => return bool_exp\n\n");} ;
 
 
